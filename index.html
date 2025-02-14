@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificação do Cliente</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            transition: all 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+        }
+        h2 {
+            color: #ff6347; /* Cor do título alterada para vermelho */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            width: 100%;
+            margin: 12px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #ff6347;
+            font-size: 16px;
+            color: #333;
+        }
+        input:focus, select:focus {
+            border-color: #ff4500;
+            outline: none;
+        }
+
+        /* Estilo do botão */
+        button {
+            background-color: #ff6347; /* Cor vermelha */
+            color: white;
+            font-size: 22px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            padding: 20px;
+            width: 100%;
+            border-radius: 40px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        /* Efeito de fenda de biquíni no fundo */
+        button {
+            background: linear-gradient(to right, #ff6347 50%, transparent 50%) no-repeat;
+            background-size: 200% 100%;
+            transition: background 0.5s ease;
+            border-radius: 30px;
+        }
+
+        button:hover {
+            background-position: -100% 0;
+        }
+
+        /* Caixa de texto transparente */
+        .message {
+            font-size: 20px;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 20px;
+            background-color: transparent;
+            padding: 10px;
+        }
+
+        .fun-message {
+            font-size: 22px;
+            color: #FF6347;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .link {
+            font-size: 18px;
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="formContainer">
+        <h2>Vamos lá, conte um pouquinho sobre você!</h2>
+        <form id="userForm">
+            <input type="text" id="nome" placeholder="Seu nome" required>
+            <select id="genero" required>
+                <option value="">Selecione seu gênero</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+            <input type="number" id="idade" placeholder="Sua idade" required>
+            <button type="button" onclick="enviarDados()">Continuar para o WhatsApp</button>
+        </form>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        // Função para verificar se os dados já foram preenchidos
+        function verificarDados() {
+            const nome = localStorage.getItem("nome");
+            if (nome) {
+                // Exibe mensagem de agradecimento e esconde o formulário
+                document.getElementById("formContainer").innerHTML = `
+                    <h2>Você de volta! Fiquei com saudades do seu pedido, ${nome}!</h2>
+                    <p class="fun-message">Não me faça esperar mais! Vamos logo atacar aquele lanche irresistível!</p>
+                    <button onclick="irParaComanda()">Acessar Comanda Digital</button>
+                `;
+            }
+        }
+
+        // Função para enviar dados e salvar no localStorage
+        function enviarDados() {
+            const nome = document.getElementById("nome").value;
+            const genero = document.getElementById("genero").value;
+            const idade = document.getElementById("idade").value;
+
+            if (!nome || !genero || !idade) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            // Armazena os dados no localStorage
+            localStorage.setItem("nome", nome);
+            localStorage.setItem("genero", genero);
+            localStorage.setItem("idade", idade);
+
+            // Redireciona para o WhatsApp
+            window.location.href = "https://wa.me/seunumero?text=Olá, quero fazer um pedido!";
+        }
+
+        // Função para redirecionar para a comanda digital
+        function irParaComanda() {
+            window.location.href = "https://pedido.anota.ai/loja/kchurrascodoguto";
+        }
+
+        // Chama a função de verificação quando a página carregar
+        verificarDados();
+    </script>
+</body>
+</html>

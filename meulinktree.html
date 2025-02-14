@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KChurrasco do Guto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: #ffffff;
+            padding: 0;
+            margin: 0;
+        }
+        .header {
+            background-image: url('https://i.imgur.com/hMeIcWO.png'); /* Link direto da imagem no Imgur */
+            background-size: cover; /* A imagem cobrirá todo o fundo sem distorcer */
+            background-position: center bottom; /* A imagem ficará centralizada e alinhada ao fundo */
+            height: 700px; /* A altura da capa foi ajustada para 700px */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .container {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            transition: 0.3s;
+        }
+        .btn.cardapio { background: #ffcc00; color: #000; }
+        .btn.whatsapp { background: #25d366; }
+        .btn.instagram { background: #e1306c; }
+        .btn.facebook { background: #1877f2; }
+        .btn:hover { opacity: 0.8; }
+        .whatsapp-fixed {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .whatsapp-fixed img {
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <img src="logo.png" alt="Logo KChurrasco do Guto" class="logo">
+            <h2>Bem-vindo ao KChurrasco do Guto</h2>
+            <a href="https://pedido.anota.ai/loja/kchurrascodoguto" class="btn cardapio">📜 Cardápio</a>
+            <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="btn whatsapp">📞 WhatsApp do KChurrasco do Guto</a>
+            <a href="https://www.instagram.com/kchurrascodoguto/" class="btn instagram">📷 Instagram</a>
+            <a href="#" class="btn facebook">📘 Facebook</a>
+        </div>
+    </div>
+
+    <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="whatsapp-fixed">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+</body>
+</html>
