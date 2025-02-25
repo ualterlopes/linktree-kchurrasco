@@ -12,27 +12,31 @@
             color: #ffffff;
             padding: 0;
             margin: 0;
+            position: relative;
+            overflow: hidden; /* Impede as bolhas de saírem da tela */
         }
+        
+        /* Estilos da Header e Container */
         .header {
             background-image: url('https://i.imgur.com/hMeIcWO.png'); /* Link direto da imagem no Imgur */
             background-size: cover;
-            background-position: center 20%; /* Ajusta a posição vertical da imagem */
-            height: 700px; /* Aumente a altura para dar mais espaço para a imagem */
+            background-position: center 20%;
+            height: 700px;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             position: relative;
         }
-
+        
         .header::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 20%; /* A parte inferior da imagem com o gradiente */
-            background: linear-gradient(to top, #121212, transparent); /* Gradiente do preto até transparente */
+            height: 20%;
+            background: linear-gradient(to top, #121212, transparent);
         }
 
         .container {
@@ -44,17 +48,14 @@
             width: 100%;
             margin: auto;
             z-index: 1;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
         .logo {
             width: 100px;
-            height: 100px; /* Define a altura e a largura para garantir que a logo seja quadrada */
+            height: 100px;
             margin-bottom: 20px;
-            border-radius: 50%; /* Torna a imagem redonda */
-            object-fit: cover; /* Ajusta a imagem para cobrir a área do círculo */
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .btn {
@@ -74,37 +75,37 @@
         .btn.whatsapp { background: #25d366; }
         .btn.instagram { background: #e1306c; }
         .btn.facebook { background: #1877f2; }
-        .btn.promo { background: #ff6347; } /* Cor para o botão de promoções */
-        .btn.historias { background: #4682b4; } /* Cor para o botão de histórias */
+        .btn.promo { background: #ff6347; }
+        .btn.historias { background: #4682b4; }
         .btn:hover { opacity: 0.8; }
 
-        .whatsapp-fixed {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25d366;
-            padding: 15px;
+        /* Estilos e animação das bolhas */
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            background-color: rgba(255, 255, 255, 0.6);
             border-radius: 50%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 2; /* Coloca o ícone do WhatsApp acima de outros elementos */
+            opacity: 0;
+            animation: bubble-animation 5s infinite;
+            z-index: 9999; /* Traz as bolhas para a frente */
         }
 
-        .whatsapp-fixed img {
-            width: 36px; /* Reduz o tamanho da imagem em 10% */
-        }
-
-        /* Responsividade */
-        @media (min-width: 768px) {
-            .container {
-                max-width: 500px; /* Limita a largura da coluna */
+        @keyframes bubble-animation {
+            0% {
+                transform: translateX(0) scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(50px) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateX(-50px) scale(0.5);
+                opacity: 0;
+                bottom: 100%;
             }
         }
 
-        @media (max-width: 768px) {
-            .btn {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
@@ -116,13 +117,37 @@
             <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="btn whatsapp">📞 WhatsApp do KChurrasco do Guto</a>
             <a href="https://www.instagram.com/kchurrascodoguto/" class="btn instagram">📷 Instagram</a>
             <a href="#" class="btn facebook">📘 Facebook</a>
-            <a href="#" class="btn promo">🎉 Promoções</a> <!-- Novo botão de Promoções -->
-            <a href="#" class="btn historias">📖 Histórias</a> <!-- Novo botão de Histórias -->
+            <a href="#" class="btn promo">🎉 Promoções</a>
+            <a href="#" class="btn historias">📖 Histórias</a>
         </div>
     </div>
 
-    <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="whatsapp-fixed">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
+    <!-- Bolhas de sabão -->
+    <script>
+        // Função para criar bolhas de forma contínua
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            
+            // Definindo um tamanho aleatório para a bolha
+            const size = Math.random() * 50 + 30; // Tamanho entre 30px e 80px
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+
+            // Definindo uma posição horizontal aleatória
+            bubble.style.left = `${Math.random() * window.innerWidth}px`;
+
+            // Adiciona a bolha ao corpo da página
+            document.body.appendChild(bubble);
+
+            // Remove a bolha após o fim da animação
+            setTimeout(() => {
+                bubble.remove();
+            }, 5000); // Tempo de vida da bolha, igual à animação
+        }
+
+        // Cria bolhas de forma contínua
+        setInterval(createBubble, 500); // A cada 500ms cria uma bolha
+    </script>
 </body>
 </html>
