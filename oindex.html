@@ -3,264 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa Completa de Marketing</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>KChurrasco do Guto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
             text-align: center;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #121212;
+            color: #ffffff;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            overflow: hidden; /* Impede as bolhas de saírem da tela */
         }
-        h2 {
-            color: #0073e6;
-        }
-        .container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background: #0073e6;
+        
+        /* Estilos da Header e Container */
+        .header {
+            background-image: url('https://i.imgur.com/hMeIcWO.png'); /* Link direto da imagem no Imgur */
+            background-size: cover;
+            background-position: center 20%;
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
-            border: none;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to top, #121212, transparent);
+        }
+
+        .container {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
             border-radius: 5px;
-            margin-top: 10px;
-        }
-        button:hover {
-            background: #005bb5;
-        }
-        .question {
-            text-align: left;
-            margin-bottom: 15px;
-        }
-        .question p {
-            font-size: 16px;
-        }
-        canvas {
-            margin-top: 20px;
-        }
-        .result {
-            margin-top: 30px;
+            text-decoration: none;
             font-size: 18px;
+            font-weight: bold;
+            color: white;
+            transition: 0.3s;
         }
-        #nextButton {
-            display: inline-block;
+
+        .btn.cardapio { background: #ffcc00; color: #000; }
+        .btn.whatsapp { background: #25d366; }
+        .btn.instagram { background: #e1306c; }
+        .btn.facebook { background: #1877f2; }
+        .btn.promo { background: #ff6347; }
+        .btn.historias { background: #4682b4; }
+        .btn:hover { opacity: 0.8; }
+
+        /* Estilos e animação das bolhas */
+        .bubble {
+            position: absolute;
+            bottom: -50px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            animation: bubble-animation 5s infinite;
+            z-index: 9999; /* Traz as bolhas para a frente */
         }
+
+        @keyframes bubble-animation {
+            0% {
+                transform: translateX(0) scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(50px) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateX(-50px) scale(0.5);
+                opacity: 0;
+                bottom: 100%;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <div class="container" id="intro">
-        <h2>Bem-vindo à Pesquisa Detalhada de Marketing</h2>
-        <p>Antes de iniciar o teste, por favor, forneça algumas informações para personalizar sua experiência.</p>
-        <form id="dataForm">
-            <div class="question">
-                <label for="nome">Nome:</label><br>
-                <input type="text" id="nome" name="nome" required><br>
-            </div>
-            <div class="question">
-                <label for="numero">Número de Telefone:</label><br>
-                <input type="text" id="numero" name="numero" required><br>
-            </div>
-            <div class="question">
-                <label for="idade">Idade:</label><br>
-                <input type="number" id="idade" name="idade" required><br>
-            </div>
-            <div class="question">
-                <label for="sexo">Sexo:</label><br>
-                <select id="sexo" name="sexo" required>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Feminino">Feminino</option>
-                    <option value="Outro">Outro</option>
-                </select><br>
-            </div>
-            <button type="button" onclick="iniciarPesquisa()">Iniciar Pesquisa</button>
-        </form>
-    </div>
-    
-    <div class="container" id="quizContainer" style="display: none;">
-        <h2>Pesquisa Detalhada de Marketing</h2>
-        <form id="quizForm">
-            <div id="questionGroup"></div>
-            <button type="button" id="nextButton" onclick="proximaPergunta()">Próxima Pergunta</button>
-        </form>
-    </div>
-    
-    <div class="container" id="resultadoContainer" style="display: none;">
-        <h2>Resultado Final</h2>
-        <canvas id="resultChart" width="400" height="200"></canvas>
-        <div class="result" id="resultadoTexto"></div>
+    <div class="header">
+        <div class="container">
+            <img src="https://i.imgur.com/hMeIcWO.png" alt="Logo KChurrasco do Guto" class="logo">
+            <h2>Bem-vindo ao KChurrasco do Guto</h2>
+            <a href="https://pedido.anota.ai/loja/kchurrascodoguto" class="btn cardapio">📜 Cardápio</a>
+            <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="btn whatsapp">📞 WhatsApp do KChurrasco do Guto</a>
+            <a href="https://www.instagram.com/kchurrascodoguto/" class="btn instagram">📷 Instagram</a>
+            <a href="#" class="btn facebook">📘 Facebook</a>
+            <a href="#" class="btn promo">🎉 Promoções</a>
+            <a href="#" class="btn historias">📖 Histórias</a>
+        </div>
     </div>
 
+    <!-- Bolhas de sabão -->
     <script>
-        let respostas = {A: 0, B: 0, C: 0};
-        let perguntaAtual = 0;
-        let grupoAtual = 0;
-        let dadosPessoais = {};  // Para armazenar os dados pessoais
-
-        let perguntas = [
-            // Marketing Digital
-            [
-                "Você gosta de criar anúncios em plataformas como Facebook, Google Ads ou Instagram Ads?",
-                "Você se interessa por estratégias de SEO (Otimização de Sites para Buscas)?",
-                "Você se sente confortável gerenciando orçamentos para anúncios pagos?",
-                "Você prefere usar dados e métricas para otimizar campanhas de anúncios?",
-                "Você gosta de escrever anúncios persuasivos?"
-            ],
-            // Social Media
-            [
-                "Você adora criar conteúdo para redes sociais como Instagram, Facebook e TikTok?",
-                "Você gosta de planejar calendários de conteúdo e estratégias de postagens?",
-                "Você tem facilidade para entender o comportamento das audiências nas redes sociais?",
-                "Você se sente confortável em interagir com seguidores e responder perguntas?",
-                "Você acha divertido engajar a audiência com stories, enquetes ou posts interativos?"
-            ],
-            // Copywriting & Neuromarketing
-            [
-                "Você tem facilidade para escrever textos persuasivos que capturam a atenção?",
-                "Você gosta de estudar como as emoções influenciam as decisões de compra?",
-                "Você se interessa em técnicas de vendas e psicologia do consumidor?",
-                "Você tem criatividade para escrever copys curtas e impactantes?",
-                "Você gosta de experimentar diferentes abordagens para melhorar a conversão de vendas?"
-            ],
-            // Análise de Dados
-            [
-                "Você se sente confortável analisando métricas e criando relatórios com dados?",
-                "Você gosta de usar ferramentas de análise de dados, como Google Analytics ou Power BI?",
-                "Você tem facilidade para interpretar relatórios de desempenho de campanhas?",
-                "Você consegue identificar padrões em dados e sugerir melhorias?",
-                "Você prefere trabalhar com números e análises em vez de criar conteúdo?"
-            ]
-        ];
-
-        function iniciarPesquisa() {
-            // Coleta os dados pessoais
-            dadosPessoais.nome = document.getElementById("nome").value;
-            dadosPessoais.numero = document.getElementById("numero").value;
-            dadosPessoais.idade = document.getElementById("idade").value;
-            dadosPessoais.sexo = document.getElementById("sexo").value;
-
-            // Exibe a próxima seção
-            document.getElementById("intro").style.display = "none";
-            document.getElementById("quizContainer").style.display = "block";
-            exibirPerguntas();
-        }
-
-        function exibirPerguntas() {
-            const perguntaGroup = perguntas[grupoAtual];
-            const questionGroupDiv = document.getElementById("questionGroup");
-            questionGroupDiv.innerHTML = "";
-
-            perguntaGroup.forEach((pergunta, index) => {
-                const questionDiv = document.createElement("div");
-                questionDiv.classList.add("question");
-                questionDiv.innerHTML = `
-                    <p>${pergunta}</p>
-                    <input type="radio" name="q${perguntaAtual + index}" value="A"> Sim, totalmente!<br>
-                    <input type="radio" name="q${perguntaAtual + index}" value="B"> Às vezes<br>
-                    <input type="radio" name="q${perguntaAtual + index}" value="C"> Não muito
-                `;
-                questionGroupDiv.appendChild(questionDiv);
-            });
-
-            if (grupoAtual === 3) {
-                document.getElementById("nextButton").innerText = "Ver Resultado";
-            }
-        }
-
-        function proximaPergunta() {
-            const form = document.getElementById("quizForm");
-            const inputs = form.getElementsByTagName("input");
-
-            for (let input of inputs) {
-                if (input.checked) {
-                    respostas[input.value]++;
-                }
-            }
-
-            perguntaAtual += 5;
-
-            if (grupoAtual < 3) {
-                grupoAtual++;
-                exibirPerguntas();
-            } else {
-                enviarRespostasParaGoogleSheets();
-                mostrarResultado();
-            }
-        }
-
-        function enviarRespostasParaGoogleSheets() {
-            const url = "URL_DO_SEU_GOOGLE_APPS_SCRIPT";  // Substitua pela URL do seu Google Apps Script
-
-            const dados = {
-                nome: dadosPessoais.nome,
-                numero: dadosPessoais.numero,
-                idade: dadosPessoais.idade,
-                sexo: dadosPessoais.sexo,
-                respostas: JSON.stringify(respostas)
-            };
-
-            fetch(url, {
-                method: "POST",
-                body: new URLSearchParams(dados),
-                headers: { "Content-Type": "application/x-www-form-urlencoded" }
-            })
-            .then(response => response.text())
-            .then(responseText => console.log(responseText))
-            .catch(error => console.error('Erro ao enviar dados:', error));
-        }
-
-        function mostrarResultado() {
-            document.getElementById("quizContainer").style.display = "none";
-            document.getElementById("resultadoContainer").style.display = "block";
+        // Função para criar bolhas de forma contínua
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
             
-            const labels = ["Marketing Digital", "Social Media", "Copywriting & Neuromarketing", "Análise de Dados"];
-            const data = [respostas.A, respostas.B, respostas.C, respostas.A];
-            
-            const ctx = document.getElementById('resultChart').getContext('2d');
-            
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Sua Pontuação',
-                        data: data,
-                        backgroundColor: '#0073e6',
-                        borderColor: '#005bb5',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
+            // Definindo um tamanho aleatório para a bolha
+            const size = Math.random() * 50 + 30; // Tamanho entre 30px e 80px
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
 
-            let resultadoTexto = "";
-            if (respostas.A > respostas.B && respostas.A > respostas.C) {
-                resultadoTexto = "Você tem uma forte afinidade com Marketing Digital, focando em estratégias e anúncios pagos.";
-            } else if (respostas.B > respostas.A && respostas.B > respostas.C) {
-                resultadoTexto = "Você se destaca em Social Media, criando conteúdo envolvente e engajando a audiência.";
-            } else if (respostas.C > respostas.A && respostas.C > respostas.B) {
-                resultadoTexto = "Você tem habilidades para Copywriting e Neuromarketing, capturando a atenção do público com textos impactantes.";
-            } else {
-                resultadoTexto = "Você parece ter um talento para Análise de Dados, otimizando estratégias com base em números e métricas.";
-            }
+            // Definindo uma posição horizontal aleatória
+            bubble.style.left = `${Math.random() * window.innerWidth}px`;
 
-            document.getElementById("resultadoTexto").innerText = resultadoTexto;
+            // Adiciona a bolha ao corpo da página
+            document.body.appendChild(bubble);
+
+            // Remove a bolha após o fim da animação
+            setTimeout(() => {
+                bubble.remove();
+            }, 5000); // Tempo de vida da bolha, igual à animação
         }
+
+        // Cria bolhas de forma contínua
+        setInterval(createBubble, 500); // A cada 500ms cria uma bolha
     </script>
 </body>
 </html>
