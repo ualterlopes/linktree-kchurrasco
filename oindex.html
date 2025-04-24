@@ -1,175 +1,160 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KChurrasco do Guto</title>
-    
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w,d,s,l,i){
-            w[l]=w[l]||[];
-            w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-            var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),
-                dl=l!='dataLayer'?'&l='+l:'';
-            j.async=true;
-            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-            f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-K4B44ZCT');
-    </script>
-    <!-- End Google Tag Manager -->
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #121212;
-            color: #ffffff;
-            padding: 0;
-            margin: 0;
-            position: relative;
-            overflow: hidden; /* Impede as bolhas de saírem da tela */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KChurrasco do Guto</title>
 
-        /* Estilos da Header e Container */
-        .header {
-            background-image: url('https://i.imgur.com/hMeIcWO.png'); /* Link direto da imagem no Imgur */
-            background-size: cover;
-            background-position: center 20%;
-            height: 700px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            position: relative;
-        }
+  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K4B44ZCT');
+  </script>
+  <!-- End Google Tag Manager -->
 
-        .header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 20%;
-            background: linear-gradient(to top, #121212, transparent);
-        }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .container {
-            background: rgba(30, 30, 30, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.5);
-            max-width: 400px;
-            width: 100%;
-            margin: auto;
-            z-index: 1;
-        }
+    .header {
+      background-image: url('https://i.imgur.com/hMeIcWO.png');
+      background-size: cover;
+      background-position: center 20%;
+      height: 700px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      position: relative;
+    }
 
-        .logo {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 20%;
+      background: linear-gradient(to top, #121212, transparent);
+    }
 
-        .btn {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            color: white;
-            transition: 0.3s;
-        }
+    .container {
+      background: rgba(30, 30, 30, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(255, 0, 0, 0.5);
+      max-width: 400px;
+      width: 100%;
+      margin: auto;
+      z-index: 1;
+    }
 
-        .btn.cardapio { background: #ffcc00; color: #000; }
-        .btn.whatsapp { background: #25d366; }
-        .btn.instagram { background: #e1306c; }
-        .btn.facebook { background: #1877f2; }
-        .btn.promo { background: #ff6347; }
-        .btn.historias { background: #4682b4; }
-        .btn:hover { opacity: 0.8; }
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-        /* Estilos e animação das bolhas */
-        .bubble {
-            position: absolute;
-            bottom: -50px;
-            background-color: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            opacity: 0;
-            animation: bubble-animation 5s infinite;
-            z-index: 9999; /* Traz as bolhas para a frente */
-        }
+    .btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      transition: 0.3s;
+    }
 
-        @keyframes bubble-animation {
-            0% {
-                transform: translateX(0) scale(0.5);
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(50px) scale(1);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateX(-50px) scale(0.5);
-                opacity: 0;
-                bottom: 100%;
-            }
-        }
-    </style>
+    .btn.cardapio { background: #ffcc00; color: #000; }
+    .btn.whatsapp { background: #25d366; }
+    .btn.instagram { background: #e1306c; }
+    .btn.facebook { background: #1877f2; }
+    .btn.promo { background: #ff6347; }
+    .btn.historias { background: #4682b4; }
+    .btn:hover { opacity: 0.8; }
+
+    .bubble {
+      position: absolute;
+      bottom: -50px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      opacity: 0;
+      animation: bubble-animation 5s infinite;
+      z-index: 9999;
+    }
+
+    @keyframes bubble-animation {
+      0% {
+        transform: translateX(0) scale(0.5);
+        opacity: 1;
+      }
+      50% {
+        transform: translateX(50px) scale(1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateX(-50px) scale(0.5);
+        opacity: 0;
+        bottom: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4B44ZCT"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4B44ZCT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-    <div class="header">
-        <div class="container">
-            <img src="https://i.imgur.com/hMeIcWO.png" alt="Logo KChurrasco do Guto" class="logo">
-            <h2>Bem-vindo ao KChurrasco do Guto</h2>
-            <a href="https://pedido.anota.ai/loja/kchurrascodoguto" class="btn cardapio">📜 Cardápio</a>
-            <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="btn whatsapp">📞 WhatsApp do KChurrasco do Guto</a>
-            <a href="https://www.instagram.com/kchurrascodoguto/" class="btn instagram">📷 Instagram</a>
-            <a href="#" class="btn facebook">📘 Facebook</a>
-            <a href="#" class="btn promo">🎉 Promoções</a>
-            <a href="#" class="btn historias">📖 Histórias</a>
-        </div>
+  <div class="header">
+    <div class="container">
+      <img src="https://i.imgur.com/hMeIcWO.png" alt="Logo KChurrasco do Guto" class="logo">
+      <h2>Bem-vindo ao KChurrasco do Guto</h2>
+      <a href="https://encr.pw/guto-comanda" class="btn cardapio">📜 Cardápio</a>
+      <a href="https://api.whatsapp.com/send?phone=5551998812221&text=oii%20vim%20pelo%20link%2C%20gostaria%20do%20card%C3%A1pio...%20%F0%9F%98%81%F0%9F%8D%9F%F0%9F%8D%94" class="btn whatsapp">📞 WhatsApp do KChurrasco do Guto</a>
+      <a href="https://www.instagram.com/kchurrascodoguto/" class="btn instagram">📷 Instagram</a>
+      <a href="#" class="btn facebook">📘 Facebook</a>
+      <a href="#" class="btn promo">🎉 Promoções</a>
+      <a href="#" class="btn historias">📖 Histórias</a>
     </div>
+  </div>
 
-    <!-- Bolhas de sabão -->
-    <script>
-        // Função para criar bolhas de forma contínua
-        function createBubble() {
-            const bubble = document.createElement('div');
-            bubble.classList.add('bubble');
-            
-            // Definindo um tamanho aleatório para a bolha
-            const size = Math.random() * 50 + 30; // Tamanho entre 30px e 80px
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-
-            // Definindo uma posição horizontal aleatória
-            bubble.style.left = `${Math.random() * window.innerWidth}px`;
-
-            // Adiciona a bolha ao corpo da página
-            document.body.appendChild(bubble);
-
-            // Remove a bolha após o fim da animação
-            setTimeout(() => {
-                bubble.remove();
-            }, 5000); // Tempo de vida da bolha, igual à animação
-        }
-
-        // Cria bolhas de forma contínua
-        setInterval(createBubble, 500); // A cada 500ms cria uma bolha
-    </script>
+  <!-- Bolhas de sabão -->
+  <script>
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 50 + 30;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * window.innerWidth}px`;
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 5000);
+    }
+    setInterval(createBubble, 500);
+  </script>
 </body>
 </html>
