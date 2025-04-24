@@ -1,3 +1,0 @@
-git add .
-git commit -m "Adicionando Linktree"
-git push origin main
